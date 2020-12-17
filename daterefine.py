@@ -85,3 +85,16 @@ for file in files:
             writer.writerow(x)
     rows = []
     os.chdir("../ToCheck") #replace with path to directory where the data sets to be processed are stored
+
+os.chdir("../dateRefined")
+with open("exceptions.txt", "w") as txtfile:
+    txtfile.write("\n----------------------------------\nExceptions\n----------------------------------\n\n")
+    for x in exceptions.keys():
+        num = len(exceptions[x])
+        if num > 0:
+            txtfile.write(x + ":"+"\n"+ str(num) + "\n----\n")
+    txtfile.write("\n----------------------------------\nNo Exceptions found\n----------------------------------\n\n")
+    for x in exceptions.keys():
+        num = len(exceptions[x])
+        if num == 0:
+            txtfile.write(x + ":"+"\n"+ str(num) + "\n----\n")
