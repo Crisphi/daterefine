@@ -16,7 +16,7 @@ files = []
 files = os.listdir(path)
 exceptions = {} #dict with all exceptions; can be exported if needed; right now the script doesn't export it
 rows = []
-newKeyOrder = ['Branch', 'File Name', 'Image ID', 'Artist', 'Title', 'Iconography', 'Part', 'Earliest Date', 'Latest Date', 'Date', 'Genre', 'Material', 'Medium', 'Height of Image Field', 'Width of Image Field', 'Type of Object', 'Height of Object', 'Width of Object', 'Diameter of Object', 'Position of Depiction on Object', 'Current Location', 'Repository Number', 'Original Location', 'Original Place', 'Original Position', 'Context', 'Place of Discovery', 'Place of Manufacture', 'Associated Scenes', 'Object Categories', 'Related Works of Art', 'Type of Similarity', 'Inscription', 'Text Source', 'Bibliography', 'Photo Archive', 'Image Credits', 'Details URL', 'Additional Information']
+newKeyOrder = ['Branch', 'File Name', 'Image ID', 'Artist', 'Surname', 'First Name', 'Epitheton', 'GND-Number', 'Title', 'Iconography', 'Part', 'Earliest Date', 'Latest Date', 'Date', 'Margin Years', 'Genre', 'Material', 'Medium', 'Height of Image Field', 'Width of Image Field', 'Type of Object', 'Height of Object', 'Width of Object', 'Diameter of Object', 'Position of Depiction on Object', 'Current Location', 'Repository Number', 'Original Location', 'Original Place', 'Original Position', 'Context', 'Place of Discovery', 'Place of Manufacture', 'Associated Scenes', 'Object Categories', 'Related Works of Art', 'Type of Similarity', 'Inscription', 'Text Source', 'Bibliography', 'Photo Archive', 'Image Credits', 'Details URL', 'Additional Information']
 
 #helper function for reordering of ordered dict
 def reorder_ordereddict(od, new_key_order):
@@ -25,8 +25,9 @@ def reorder_ordereddict(od, new_key_order):
     return new_od
 
 for file in files:
+    print(file)
     exceptions[file] = []
-    with open(file, newline="") as csvfile:
+    with open(file, newline="", encoding="utf-8") as csvfile:
         reader = csv.DictReader(csvfile, delimiter=",")
         for row in reader:
             nrow = OrderedDict(row.copy())
@@ -77,7 +78,7 @@ for file in files:
 
     os.chdir("../dateRefined") #replace with path to directory where refined data sets should be saved
     filename = "dateRefined-" + file
-    with open(filename, "w", newline="") as csvfile:
+    with open(filename, "w", newline="", encoding="utf-8") as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames= newKeyOrder)
 
         writer.writeheader()
