@@ -66,7 +66,6 @@ for file in files:
             else:
                 nrow["Date"] = None
 
-            del nrow["Margin Years"]
             rows.append(nrow)
     print("Exceptions for: "+ file +"\n-------------------------")
     for x in exceptions[file]:
